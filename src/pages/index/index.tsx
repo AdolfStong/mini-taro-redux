@@ -19,7 +19,7 @@ class Index extends Component {
     return (
       <View className="index">
         <View>
-          <Text>Hello, World</Text>
+          <Text>Hello, World !</Text>
         </View>
         <Button onClick={() => goCount()}>go to count page</Button>
       </View>
