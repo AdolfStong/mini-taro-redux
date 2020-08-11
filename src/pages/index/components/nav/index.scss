@@ -1,0 +1,23 @@
+.nav {
+  height: 100px;
+  overflow-y: hidden;
+  .noScrollBar {
+    overflow-x: scroll;
+    height: 112px;
+    .navList {
+      font-size: 40px;
+      display: flex;
+      align-items: center;
+      height: 100px;
+      flex-wrap: nowrap;
+      overflow-x: scroll;
+      .title {
+        color: #333;
+        &.active {
+          color: #50bafe;
+        }
+        padding: 0 30px;
+      }
+    }
+  }
+}
