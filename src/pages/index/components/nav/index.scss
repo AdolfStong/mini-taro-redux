@@ -13,6 +13,8 @@
       overflow-x: scroll;
       .title {
         color: #333;
+        display: flex;
+
         &.active {
           color: #50bafe;
         }

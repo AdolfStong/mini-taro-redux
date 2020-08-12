@@ -6,6 +6,7 @@
  * @LastEditors: Shentong
  * @LastEditTime: 2020-08-11 15:00:12
  */
+const path  = require('path')
 
 const config = {
   projectName: "taroApp",
@@ -20,6 +21,11 @@ const config = {
   outputRoot: "dist",
   plugins: [],
   defineConstants: {},
+  alias: {
+    '@/src': path.resolve(__dirname, '..', 'src'),
+    '@/constants': path.resolve(__dirname, '..', 'src/constants'),
+    '@/components': path.resolve(__dirname, '..', 'src/components')
+  },
   copy: {
     patterns: [],
     options: {},
