@@ -47,7 +47,7 @@ const navList: Array<navCategory> = [
 ];
 
 const navStyle: any = {
-  width: 750,
+  width: 850,
   // width: navList.length * 120,
 };
 
