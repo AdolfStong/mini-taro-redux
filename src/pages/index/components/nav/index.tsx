@@ -1,5 +1,5 @@
 import Taro from '@tarojs/taro'
-import React, { Component, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { View } from "@tarojs/components";
 import { navList } from "@/constants/data"
 // import { AtButton } from "taro-ui";
@@ -22,17 +22,21 @@ const Nav = (props: any) => {
     getDataByCurrentTab(index);
   };
 
-  useEffect(() => {
+  const getTabsDomInfo: Function = () => {
     const query = Taro.createSelectorQuery()
     query.selectAll('.title').boundingClientRect( rec => {
       console.log(rec)
     }).exec()
+  };
+
+  useEffect(() => {
+    getTabsDomInfo()
   })
 
   return (
     <View className="nav">
       <View className="nav.noScrollBar">
-        <View className="navList" style={navStyle}>
+        <View className="navList" style={navStyle} >
           {navList.map((navItem, index) => {
             return (
               <View
