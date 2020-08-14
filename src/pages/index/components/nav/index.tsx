@@ -8,7 +8,7 @@ import "./index.scss";
 interface Props {}
 
 const navStyle: any = {
-  width: 850,
+  // width: 850,
   // width: navList.length * 120,
 };
 
