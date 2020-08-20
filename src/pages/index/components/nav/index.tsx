@@ -1,7 +1,7 @@
-import Taro from '@tarojs/taro'
-import React, { Component, useState, useEffect } from "react";
+import Taro from "@tarojs/taro";
+import React, { useState, useEffect } from "react";
 import { View } from "@tarojs/components";
-import { navList } from "@/constants/data"
+import { navList } from "@/constants/data";
 // import { AtButton } from "taro-ui";
 import "./index.scss";
 
@@ -23,11 +23,14 @@ const Nav = (props: any) => {
   };
 
   useEffect(() => {
-    const query = Taro.createSelectorQuery()
-    query.selectAll('.title').boundingClientRect( rec => {
-      console.log(rec)
-    }).exec()
-  })
+    const query = Taro.createSelectorQuery();
+    query
+      .selectAll(".title")
+      .boundingClientRect((rec) => {
+        console.log(rec);
+      })
+      .exec();
+  });
 
   return (
     <View className="nav">
