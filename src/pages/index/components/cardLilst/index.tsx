@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { View, Image } from "@tarojs/components";
 import ClassifyTitle from "@/components/classifyTitle";
+import Card from "@/components/card";
 
 import "./index.scss";
 
@@ -10,6 +11,7 @@ const CardLilst = (props: any) => {
   return (
     <View className="cardList">
       <ClassifyTitle title={""} hasMore={true}></ClassifyTitle>
+      <Card></Card>
     </View>
   );
 };
