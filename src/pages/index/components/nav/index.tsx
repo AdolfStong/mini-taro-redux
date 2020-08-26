@@ -8,7 +8,7 @@ import "./index.scss";
 interface Props {}
 
 const navStyle: any = {
-  width: 850,
+  // width: 850,
   // width: navList.length * 120,
 };
 
@@ -22,7 +22,7 @@ const Nav = (props: any) => {
     getDataByCurrentTab(index);
   };
 
-  useEffect(() => {
+  const getTabsDomInfo: Function = () => {
     const query = Taro.createSelectorQuery();
     query
       .selectAll(".title")
@@ -30,6 +30,10 @@ const Nav = (props: any) => {
         console.log(rec);
       })
       .exec();
+  };
+
+  useEffect(() => {
+    getTabsDomInfo();
   });
 
   return (

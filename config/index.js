@@ -4,9 +4,9 @@
  * @Author: Shentong
  * @Date: 2020-08-03 15:26:57
  * @LastEditors: Shentong
- * @LastEditTime: 2020-08-11 15:00:12
+ * @LastEditTime: 2020-08-25 13:42:00
  */
-const path  = require('path')
+const path = require("path");
 
 const config = {
   projectName: "taroApp",
@@ -22,9 +22,10 @@ const config = {
   plugins: [],
   defineConstants: {},
   alias: {
-    '@/src': path.resolve(__dirname, '..', 'src'),
-    '@/constants': path.resolve(__dirname, '..', 'src/constants'),
-    '@/components': path.resolve(__dirname, '..', 'src/components')
+    "@/api": path.resolve(__dirname, "..", "api"),
+    "@/src": path.resolve(__dirname, "..", "src"),
+    "@/constants": path.resolve(__dirname, "..", "src/constants"),
+    "@/components": path.resolve(__dirname, "..", "src/components"),
   },
   copy: {
     patterns: [],
