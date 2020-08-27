@@ -1,7 +1,23 @@
 .banner {
   .swiperContainer {
-    .imgContainer {
-      text-align: center;
+    height: 224px !important;
+    .swiper-item {
+      // width: 600px !important;
+      // padding: 0 10px;
+      .imgContainer {
+        text-align: center;
+        .swiper-img {
+          border-radius: 30px;
+          width: 100%;
+          display: block;
+          transform: scale(0.9);
+          height: 224px;
+          transition: all 0.3s ease;
+          &.swiper-active {
+            transform: scale(1); //放大缩放的效果
+          }
+        }
+      }
     }
   }
 }

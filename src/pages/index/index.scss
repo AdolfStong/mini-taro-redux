@@ -1,6 +1,7 @@
 .index {
   flex-direction: column;
   width: 100%;
+  margin-bottom: 30px;
   .labels {
     display: flex;
     justify-content: space-between;
@@ -19,6 +20,15 @@
         color: #3a4e73;
         font-size: 26px;
       }
+    }
+  }
+  .load-more {
+    height: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .load-finish {
+      color: rgb(92, 171, 255);
     }
   }
 }

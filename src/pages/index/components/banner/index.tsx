@@ -8,22 +8,32 @@ import "./index.scss";
 const Banner = (props: any) => {
   console.log("111", props);
   const { banner = [] } = props;
+  const [nowIdx, setNowIdx] = useState<Number>(0);
+
+  const swiperChange: Function = (e) => {
+    const {
+      detail: { current },
+    } = e;
+    setNowIdx(current);
+  };
   return (
     <View className="banner">
       <Swiper
         className="swiperContainer"
-        indicatorColor="#999"
-        indicatorActiveColor="#333"
         circular
-        indicatorDots
-        autoplay
+        autoplay={false}
+        previousMargin="50px"
+        nextMargin="50px"
+        onChange={(e) => swiperChange(e)}
       >
         {banner.map((item, index) => {
           return (
-            <SwiperItem key={index}>
+            <SwiperItem key={index} className="swiper-item">
               <View className="imgContainer">
                 <Image
-                  className="swiper-img"
+                  className={`swiper-img ${
+                    nowIdx === index ? "swiper-active" : ""
+                  }`}
                   mode="widthFix"
                   src={item.pic}
                 ></Image>

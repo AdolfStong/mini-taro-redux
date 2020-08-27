@@ -1,1 +1,114 @@
 @import "~taro-ui/dist/style/index.scss";
+// @import "./common/reset";
+
+.clear::after {
+  content: "";
+  clear: both;
+  display: block;
+}
+.header-common-bgc {
+  background: #ff9c00;
+}
+.arrow {
+  display: inline-block;
+  border-top: 4px solid;
+  border-right: 4px solid;
+  width: 16rpx;
+  height: 16rpx;
+  border-color: #b0b8c7;
+  margin-right: 10rpx;
+}
+.arrow-left {
+  transform: rotate(-135deg);
+}
+.arrow-right {
+  transform: rotate(45deg);
+}
+.arrow-bottom {
+  transform: rotate(135deg);
+  transition: transform 0.2s;
+}
+.arrow-top {
+  transform: rotate(-45deg);
+  transition: transform 0.2s;
+}
+.arrow-white {
+  border-color: #fff;
+}
+::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  color: transparent;
+}
+.ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.bg-box {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  background: #efeff4;
+}
+.row-count-1 {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.row-count-2 {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2; // 控制多行的行数
+  -webkit-box-orient: vertical;
+}
+.scroll-touch {
+  -webkit-overflow-scrolling: touch;
+}
+.flex-c-c {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.son:before {
+  content: "";
+  overflow: hidden;
+}
+.skeleton {
+  position: relative;
+  overflow: hidden;
+  border: none !important;
+  border-radius: 5px;
+  background-color: transparent !important;
+  background-image: none !important;
+  &::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 9;
+    width: 100%;
+    height: 100%;
+    background-color: #f2f2f2;
+    display: block;
+  }
+  &.skeleton-container {
+    overflow: visible;
+    &::after {
+      z-index: -999;
+      background: transparent;
+    }
+  }
+}
+@keyframes skeleton-ani {
+  /* 骨架屏动画 */
+  from {
+    left: -100%;
+  }
+  to {
+    left: 150%;
+  }
+}

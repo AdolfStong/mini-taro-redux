@@ -1,17 +1,21 @@
-import React, { useState, useEffect } from "react";
-import { View, Image } from "@tarojs/components";
+import React from "react";
+import { View } from "@tarojs/components";
 import ClassifyTitle from "@/components/classifyTitle";
 import Card from "@/components/card";
 
 import "./index.scss";
 
 const CardLilst = (props: any) => {
-  console.log("111", props);
-  const { banner = [] } = props;
+  const { card: { list = [], title = "", describe = "" } = {} } = props;
+
   return (
     <View className="cardList">
-      <ClassifyTitle title={""} hasMore={true}></ClassifyTitle>
-      <Card></Card>
+      <ClassifyTitle
+        title={title}
+        hasMore={true}
+        desc={describe}
+      ></ClassifyTitle>
+      <Card list={list}></Card>
     </View>
   );
 };

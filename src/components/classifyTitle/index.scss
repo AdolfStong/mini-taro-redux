@@ -7,10 +7,10 @@
     display: flex;
     justify-content: center;
     flex-direction: column;
-    .title-icon{
+    .title-icon {
       display: flex;
       align-items: center;
-      .icon{
+      .icon {
         width: 8px;
         height: 36px;
         border-radius: 4px;
@@ -33,5 +33,7 @@
   .has-more-btn {
     color: rgb(176, 184, 199);
     font-size: 30px;
+    display: flex;
+    align-items: center;
   }
 }

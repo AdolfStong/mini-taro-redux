@@ -22,19 +22,19 @@ const Nav = (props: any) => {
     getDataByCurrentTab(index);
   };
 
-  const getTabsDomInfo: Function = () => {
-    const query = Taro.createSelectorQuery();
-    query
-      .selectAll(".title")
-      .boundingClientRect((rec) => {
-        console.log(rec);
-      })
-      .exec();
-  };
+  // const getTabsDomInfo: Function = () => {
+  //   const query = Taro.createSelectorQuery();
+  //   query
+  //     .selectAll(".title")
+  //     .boundingClientRect((rec) => {
+  //       console.log(rec);
+  //     })
+  //     .exec();
+  // };
 
-  useEffect(() => {
-    getTabsDomInfo();
-  });
+  // useEffect(() => {
+  //   getTabsDomInfo();
+  // });
 
   return (
     <View className="nav">
