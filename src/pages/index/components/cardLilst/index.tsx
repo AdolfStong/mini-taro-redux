@@ -5,12 +5,26 @@ import Card from "@/components/card";
 
 import "./index.scss";
 
-const CardLilst = (props: any) => {
-  const { card: { list = [], title = "", describe = "" } = {} } = props;
+interface CardItem {
+  id: number;
+  title: string;
+  hasMore: boolean;
+  describe: string;
+  list: Array<any>;
+}
+
+interface cardContainer {
+  card: CardItem;
+}
+
+const CardLilst = (props: cardContainer) => {
+  console.log("CardLilst", props);
+  const { card: { list = [], title = "", describe = "", id = 0 } = {} } = props;
 
   return (
     <View className="cardList">
       <ClassifyTitle
+        id={id}
         title={title}
         hasMore={true}
         desc={describe}

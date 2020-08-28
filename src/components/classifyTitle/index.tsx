@@ -4,6 +4,7 @@ import { View } from "@tarojs/components";
 import "./index.scss";
 
 interface Props {
+  id: number;
   title: string;
   desc?: string;
   hasMore: boolean;
