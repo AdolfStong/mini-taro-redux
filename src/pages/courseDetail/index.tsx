@@ -52,6 +52,7 @@ const CourseDetail = (props) => {
   return (
     <View className="course-detail">
       <DetailBanner banner={bannerImg}></DetailBanner>
+      <View className="panel"></View>
     </View>
   );
 };
