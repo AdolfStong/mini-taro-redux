@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { View, Image } from "@tarojs/components";
 
 import { Swiper, SwiperItem } from "@tarojs/components";
@@ -6,7 +6,6 @@ import { Swiper, SwiperItem } from "@tarojs/components";
 import "./index.scss";
 
 const Banner = (props: any) => {
-  console.log("111", props);
   const { banner = [] } = props;
   const [nowIdx, setNowIdx] = useState<Number>(0);
 

@@ -1,0 +1,24 @@
+.detail-banner {
+  .swiperContainer {
+    height: 520px !important;
+    .swiper-item {
+      .imgContainer {
+        text-align: center;
+        .swiper-img {
+          width: 100%;
+          display: block;
+          height: 520px;
+          transition: all 0.3s ease;
+        }
+        .play-icon {
+          width: 140px;
+          height: 140px;
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+        }
+      }
+    }
+  }
+}

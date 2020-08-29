@@ -2,45 +2,58 @@ import Taro, { getCurrentInstance } from "@tarojs/taro";
 import React, { useState, useEffect } from "react";
 import { View } from "@tarojs/components";
 
-import Nodata from "./components/noda";
+import DetailBanner from "./components/banner";
 
 import "./index.scss";
 
 import Api from "@/api";
 
 const CourseDetail = (props) => {
-  console.log("CourseDetail-props", props, getCurrentInstance().router.params);
-  const [courseId, setCourseId] = useState("");
+  console.log("CourseDetail-props", props);
+  const [courseId, setCourseId] = useState<string>("");
+  const [bannerImg, setBannerImg] = useState<Array<string>>([]);
+
+  const getQuery: Function = () => {
+    const curInstance = getCurrentInstance();
+    if (curInstance && curInstance.router && curInstance.router.params) {
+      const id = curInstance.router.params.id;
+      setCourseId(id);
+    }
+  };
+
+  /** 详情接口回调函数 */
+  const detailCallBack: Function = (data: any) => {
+    const { images = [] } = data;
+    if (images.length) {
+      images.unshift(images[0]);
+    }
+    setBannerImg(images);
+    console.log("data - info", images);
+  };
 
   useEffect(() => {
-    const curInstance = getCurrentInstance();
-    console.log("curInstance", curInstance);
-    const id = curInstance.router.params.id;
-
-    setCourseId(id);
-    console.log(courseId, "0000");
+    getQuery();
   }, []);
+  useEffect(() => {
+    courseId && getDetailInfo(courseId, detailCallBack);
+  }, [courseId]);
 
-  const getDetailInfo: Function = (id: string) => {
+  const getDetailInfo: Function = (id: string, cb?: Function) => {
     Taro.request({
       url: Api.getCourseDetailInfo(),
       data: { id },
       success: function (res) {
-        console.log("getCourseDetailInfo-res", res);
-        // let {
-        //   data: {
-        //     data: { banner = [], labels = [], operation_list: operationList },
-        //   } = {},
-        // } = res;
+        let { data: { data } = {} } = res;
+        cb && cb(data);
       },
     });
   };
 
-  useEffect(() => {
-    getDetailInfo();
-  }, []);
-
-  return <View className="course-detail">course-detail</View>;
+  return (
+    <View className="course-detail">
+      <DetailBanner banner={bannerImg}></DetailBanner>
+    </View>
+  );
 };
 
 export default CourseDetail;
