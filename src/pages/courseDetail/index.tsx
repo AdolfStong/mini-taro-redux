@@ -138,6 +138,7 @@ const CourseDetail = (props) => {
           <Image
             src={getImgSrcVal(detailInfo.description_text)}
             mode="widthFix"
+            className="img"
           ></Image>
         </View>
       </View>
