@@ -4,6 +4,7 @@ const api = {
     `https://test.meixiu.mobi/api/star/v1/banner/findAllBanner`,
   getIndex: () => `${BASE_URL}/index/index`,
   getIndexPage: () => `${BASE_URL}/index/getPage`,
+  getCourseDetailInfo: () => `${BASE_URL}/store/combinationDetail`,
 };
 
 export default api;

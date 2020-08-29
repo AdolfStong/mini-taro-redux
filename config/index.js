@@ -23,6 +23,7 @@ const config = {
   defineConstants: {},
   alias: {
     "@/api": path.resolve(__dirname, "..", "api"),
+    "@/resource": path.resolve(__dirname, "..", "src/resource"),
     "@/src": path.resolve(__dirname, "..", "src"),
     "@/constants": path.resolve(__dirname, "..", "src/constants"),
     "@/components": path.resolve(__dirname, "..", "src/components"),
