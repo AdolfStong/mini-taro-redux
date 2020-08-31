@@ -1,0 +1,36 @@
+.no-data {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 190px;
+  .img {
+    width: 396px;
+    height: 308px;
+    vertical-align: middle;
+  }
+  .desc {
+    margin: 24px 0 60px;
+    color: #bfc2cc;
+    font-size: 30px;
+    font-weight: 400;
+    text-align: center;
+  }
+  .btn {
+    width: 320px;
+    height: 88px;
+    border-radius: 44px;
+    font-size: 32px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    &.buy {
+      background: #5cabff;
+      color: #fff;
+    }
+    &.gift {
+      margin-top: 50px;
+      background: #f5f7fa;
+      color: #5cabff;
+    }
+  }
+}
