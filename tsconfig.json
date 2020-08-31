@@ -24,6 +24,7 @@
       "@/api": ["./api/*"],
       "@/src/*": ["./src/*"],
       "@/constants/*": ["./src/constants/*"],
+      "@/resource/*": ["./src/resource/*"],
       "@/components/*": ["./src/components/*"],
       "@/utils/*": ["./src/utils/*"],
       "@/package": ["./package.json"],
