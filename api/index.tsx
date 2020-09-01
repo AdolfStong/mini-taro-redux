@@ -5,6 +5,7 @@ const api = {
   getIndex: () => `${BASE_URL}/index/index`,
   getIndexPage: () => `${BASE_URL}/index/getPage`,
   getCourseDetailInfo: () => `${BASE_URL}/store/combinationDetail`,
+  getLabelDetail: () => `${BASE_URL}/index/getLabelDetail`,
 };
 
 export default api;

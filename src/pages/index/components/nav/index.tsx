@@ -13,13 +13,12 @@ const navStyle: any = {
 };
 
 const Nav = (props: any) => {
-  console.log("nav-props", props);
   const { getDataByCurrentTab } = props;
   const [tabIndex, setTabIndex] = useState<Number>(0);
 
   const navItemClick: Function = (index: Number) => {
     setTabIndex(index);
-    getDataByCurrentTab(index);
+    getDataByCurrentTab(index, navList[`${index}`]);
   };
 
   // const getTabsDomInfo: Function = () => {

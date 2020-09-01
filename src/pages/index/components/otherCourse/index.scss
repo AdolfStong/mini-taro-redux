@@ -1,0 +1,33 @@
+.otherCourse {
+  padding: 30px;
+  .recommend {
+    .img {
+      background: rgb(238, 238, 238);
+      width: 100%;
+      height: 320px;
+      border-radius: 15px 15px 0 0;
+    }
+    .title {
+      color: #333;
+      font-size: 36px;
+      font-weight: 700;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      padding: 20px 20px 10px;
+    }
+    .subhead {
+      color: #afafaf;
+      font-size: 24px;
+      font-weight: 400;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      padding: 0 25px 20px;
+    }
+  }
+  .card-type2 {
+  }
+  .all-course {
+  }
+}

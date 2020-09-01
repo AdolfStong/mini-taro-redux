@@ -1,4 +1,7 @@
 .course-detail {
+  .video-container {
+    // height: 520px;
+  }
   .panel {
     padding: 40px;
     position: relative;
@@ -193,6 +196,23 @@
             border-bottom-width: 2px;
             border-left-width: 0;
           }
+        }
+      }
+    }
+    .detail-menu {
+      height: 100px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      .tab {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #bfc2cc;
+        font-size: 34px;
+        font-weight: 700;
+        &.active {
+          color: #3d7eff;
         }
       }
     }

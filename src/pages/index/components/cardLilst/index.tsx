@@ -18,7 +18,6 @@ interface cardContainer {
 }
 
 const CardLilst = (props: cardContainer) => {
-  console.log("CardLilst", props);
   const { card: { list = [], title = "", describe = "", id = 0 } = {} } = props;
 
   return (

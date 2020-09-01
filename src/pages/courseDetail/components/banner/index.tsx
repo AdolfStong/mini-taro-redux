@@ -7,13 +7,19 @@ import "./index.scss";
 
 import PlayIcon from "@/resource/images/play-icon.png";
 
-const DetailBanner = (props: any) => {
+type Callback = () => void;
+
+interface Props {
+  banner: Array<string>;
+  swiperClickEmit?: Function
+}
+
+const DetailBanner = (props: Props) => {
   // console.log(props, "detai-banner");
-  const { banner = [] } = props;
+  const { banner = [], swiperClickEmit } = props;
   const [swiperList, setSwiperList] = useState<Array<string>>([]);
 
   useEffect(() => {
-    console.log(banner);
     setSwiperList(banner);
   }, [banner]);
 
@@ -23,12 +29,21 @@ const DetailBanner = (props: any) => {
   //   } = e;
   //   setNowIdx(current);
   // };
+  const SwiperItemClick: Function = (index: Number) => {
+    // console.log(index);
+    if (index === 0 && swiperClickEmit) swiperClickEmit()
+  };
+
   return (
     <View className="detail-banner">
       <Swiper className="swiperContainer" circular autoplay>
         {swiperList.map((item, index) => {
           return (
-            <SwiperItem key={index} className="swiper-item">
+            <SwiperItem
+              key={index}
+              className="swiper-item"
+              onClick={() => SwiperItemClick(index)}
+            >
               <View className="imgContainer">
                 <Image
                   className="swiper-img"

@@ -4,10 +4,16 @@ import { View, Image } from "@tarojs/components";
 import Nav from "./components/nav";
 import Banner from "./components/banner";
 import CardLilst from "./components/cardLilst";
+import OtherCourse from "./components/otherCourse";
 
 import "./index.scss";
 
 import Api from "@/api";
+
+interface Tab {
+  id: string;
+  title: string;
+}
 
 const Index = () => {
   const [tabIndex, setTabIndex] = useState<Number>(0);
@@ -15,9 +21,12 @@ const Index = () => {
   const [labels, setLabels] = useState<Array<any>>([]);
   const [operationList, setOperationList] = useState<Array<any>>([]);
   const [pageLoadingFinish, setPageLoadingFinish] = useState<boolean>(false);
-
-  const getDataByCurrentTab: Function = (curTab: Number) => {
+  /** 非 精选下的内容 start*/
+  const [aTabInfo, setTabInfo] = useState<Tab>({ id: "", title: "" });
+  /** 非 精选下的内容 end*/
+  const getDataByCurrentTab: Function = (curTab: Number, tab: Tab) => {
     setTabIndex(curTab);
+    setTabInfo(tab);
   };
 
   const compare: Function = (property: string) => {
@@ -28,7 +37,7 @@ const Index = () => {
     };
   };
 
-  // 获取首页数据接口
+  // 获取首页”精选“下数据接口
   const getIndexInfo = () => {
     Taro.request({
       url: Api.getIndex(),
@@ -50,7 +59,6 @@ const Index = () => {
       },
     });
   };
-
   // 《大家都在看》 分页
   const getIndexPage = (start: number, successCallback: Function) => {
     Taro.request({
@@ -98,43 +106,48 @@ const Index = () => {
     getIndexInfo();
   }, []);
 
-  useEffect(() => {
-    console.log("index-tabIndex", tabIndex);
-  }, [tabIndex]);
+  useEffect(() => {}, [tabIndex]);
 
   useReachBottom(() => {
-    !pageLoadingFinish && laodMore();
+    !pageLoadingFinish && tabIndex === 0 && laodMore();
   });
 
   return (
     <View className="index">
-      <View>
-        <Nav
-          getDataByCurrentTab={getDataByCurrentTab}
-          tabIndex={tabIndex}
-        ></Nav>
-        <Banner banner={banner}></Banner>
-        <View className="labels">
-          {labels.map((label, label_index) => {
-            return (
-              <View className="item" key={label_index}>
-                <Image className="img" mode="widthFix" src={label.icon}></Image>
-                <View className="title">{label.title}</View>
-              </View>
-            );
-          })}
+      <Nav getDataByCurrentTab={getDataByCurrentTab} tabIndex={tabIndex}></Nav>
+      {/* 其他模块 */}
+      {tabIndex !== 0 ? (
+        <OtherCourse aTabInfo={aTabInfo}></OtherCourse>
+      ) : (
+        // 精选模块
+        <View className="best-course">
+          <Banner banner={banner}></Banner>
+          <View className="labels">
+            {labels.map((label, label_index) => {
+              return (
+                <View className="item" key={label_index}>
+                  <Image
+                    className="img"
+                    mode="widthFix"
+                    src={label.icon}
+                  ></Image>
+                  <View className="title">{label.title}</View>
+                </View>
+              );
+            })}
+          </View>
+          <View className="card-container">
+            {operationList.map((operate) => {
+              return <CardLilst card={operate} key={operate.id}></CardLilst>;
+            })}
+          </View>
+          <View className="load-more">
+            {pageLoadingFinish && (
+              <View className="load-finish">我是有底线的</View>
+            )}
+          </View>
         </View>
-        <View className="card-container">
-          {operationList.map((operate) => {
-            return <CardLilst card={operate} key={operate.id}></CardLilst>;
-          })}
-        </View>
-        <View className="load-more">
-          {pageLoadingFinish && (
-            <View className="load-finish">我是有底线的</View>
-          )}
-        </View>
-      </View>
+      )}
     </View>
   );
 };

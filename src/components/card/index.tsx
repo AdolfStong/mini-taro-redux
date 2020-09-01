@@ -12,12 +12,17 @@ interface CardItem {
   activity_title: string;
 }
 
+/**
+ * @description card 排列方式
+ * @params { type: 1/2, list: [] }
+ */
 interface CardItemContainer {
   list: Array<CardItem>;
+  type?: number;
 }
 
 const Card = (props: CardItemContainer) => {
-  const { list = [] } = props;
+  const { list = [], type = 1 } = props;
 
   const cardClickEvt: Function = (cardId: string) => {
     Taro.navigateTo({
@@ -26,7 +31,7 @@ const Card = (props: CardItemContainer) => {
   };
 
   return (
-    <View className="card">
+    <View className={`card ${type === 2 ? "card-type" : ""}`}>
       {list.map((item: CardItem, index: number) => {
         return (
           <View
@@ -34,12 +39,19 @@ const Card = (props: CardItemContainer) => {
             key={index}
             onClick={() => cardClickEvt(`${item.id}`)}
           >
-            <Image className="img" mode="widthFix" src={item.image}></Image>
-            <View className="title">{item.title}</View>
-            <View className="card-labels">
-              <View className="apply_class label">{item.apply_class}</View>
-              <View className="activity_title label">
-                {item.activity_title}
+            <Image
+              className="img"
+              mode="widthFix"
+              lazy-load
+              src={item.image}
+            ></Image>
+            <View className="info">
+              <View className="title">{item.title}</View>
+              <View className="card-labels">
+                <View className="apply_class label">{item.apply_class}</View>
+                <View className="activity_title label">
+                  {item.activity_title}
+                </View>
               </View>
             </View>
           </View>

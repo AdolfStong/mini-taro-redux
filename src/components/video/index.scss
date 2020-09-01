@@ -1,0 +1,9 @@
+.video-player-container {
+  position: relative;
+  z-index: 999;
+  // height: calc(100%+60px);
+  margin-bottom: 60rpx;
+  .video-player {
+    width: 100%;
+  }
+}
