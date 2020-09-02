@@ -204,6 +204,15 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
+      background: #fff;
+      &.fixed-tabs {
+        position: fixed;
+        top: 0;
+        width: 100%;
+        left: 0;
+        padding: 0 30rpx;
+        box-sizing: border-box;
+      }
       .tab {
         display: flex;
         justify-content: center;

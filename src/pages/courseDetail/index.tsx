@@ -3,7 +3,7 @@ import Taro, {
   usePageScroll,
   useReady,
 } from "@tarojs/taro";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { View, Image } from "@tarojs/components";
 
 import DetailBanner from "./components/banner";
@@ -23,8 +23,11 @@ const CourseDetail = (props) => {
   const [groupList, setGroupList] = useState<Array<any>>([]);
   const [showVideoPlayer, setShowVideoPlayer] = useState<boolean>(false);
   const [menuTop, setMenuTop] = useState<number>(0);
+  const [fixedTabs, setFixedTabsStatus] = useState<boolean>(false);
 
   const [detailImgs, setDetailImgs] = useState<Array<string>>([]);
+
+  const refContainer = useRef(null);
 
   const getQuery: Function = () => {
     const curInstance = getCurrentInstance();
@@ -62,9 +65,11 @@ const CourseDetail = (props) => {
   };
 
   usePageScroll((scroll) => {
-    console.log(scroll, "scroll");
-    if (scroll.scrollTop >= menuTop - 100) {
-      console.log("大于拉");
+    console.log(".current", refContainer.current);
+    if (scroll.scrollTop >= menuTop - 75) {
+      !fixedTabs && setFixedTabsStatus(true);
+    } else {
+      fixedTabs && setFixedTabsStatus(false);
     }
   });
 
@@ -108,13 +113,20 @@ const CourseDetail = (props) => {
   const getTabsDomInfo: Function = () => {
     const query = Taro.createSelectorQuery();
     console.log("query", query);
+
     query.select(".detail-menu");
     query.selectViewport().scrollOffset();
     query.exec(function (res) {
+      console.log("res[0].scrollHeight", res[0].scrollHeight);
       setMenuTop(res[0].scrollHeight); // .detail-menu节点的上边界坐标
     });
+
+    query.selectAll(".detail-menu .tab");
+    query.selectViewport().scrollOffset();
+    query.exec(function (res) {
+      console.log("select-all", res);
+    });
   };
-  useEffect(() => {}, []);
   useReady(() => {
     getTabsDomInfo();
   });
@@ -197,7 +209,10 @@ const CourseDetail = (props) => {
             })}
           </View>
         </View>
-        <View className="detail-menu">
+        <View
+          ref={refContainer}
+          className={`detail-menu ${fixedTabs && "fixed-tabs"}`}
+        >
           <View className="tab active">课程特色</View>
           <View className="tab">课程目录</View>
           <View className="tab">常见问题</View>
