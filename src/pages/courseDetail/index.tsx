@@ -2,6 +2,7 @@ import Taro, {
   getCurrentInstance,
   usePageScroll,
   useReady,
+  useDidShow
 } from "@tarojs/taro";
 import React, { useState, useEffect, useRef } from "react";
 import { View, Image } from "@tarojs/components";
@@ -62,6 +63,10 @@ const CourseDetail = (props) => {
 
     setGroupList(pink_square);
     setDetailInfo(data);
+
+    setTimeout(()=> {
+      getTabsDomInfo();
+    }, 1000)
   };
 
   usePageScroll((scroll) => {
@@ -117,19 +122,15 @@ const CourseDetail = (props) => {
     query.select(".detail-menu");
     query.selectViewport().scrollOffset();
     query.exec(function (res) {
-      console.log("res[0].scrollHeight", res[0].scrollHeight);
       setMenuTop(res[0].scrollHeight); // .detail-menu节点的上边界坐标
     });
 
-    query.selectAll(".detail-menu .tab");
+    query.selectAll(".detail-menu .tab").boundingClientRect();
     query.selectViewport().scrollOffset();
     query.exec(function (res) {
       console.log("select-all", res);
     });
   };
-  useReady(() => {
-    getTabsDomInfo();
-  });
 
   if (isLoading) return <View></View>;
   return (
