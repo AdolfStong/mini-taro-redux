@@ -2,7 +2,6 @@ import Taro, {
   getCurrentInstance,
   usePageScroll,
   useReady,
-  useDidShow
 } from "@tarojs/taro";
 import React, { useState, useEffect, useRef } from "react";
 import { View, Image } from "@tarojs/components";
@@ -25,6 +24,7 @@ const CourseDetail = (props) => {
   const [showVideoPlayer, setShowVideoPlayer] = useState<boolean>(false);
   const [menuTop, setMenuTop] = useState<number>(0);
   const [fixedTabs, setFixedTabsStatus] = useState<boolean>(false);
+  const [imgOnload, setImgOnload] = useState<boolean>(false);
 
   const [detailImgs, setDetailImgs] = useState<Array<string>>([]);
 
@@ -63,14 +63,10 @@ const CourseDetail = (props) => {
 
     setGroupList(pink_square);
     setDetailInfo(data);
-
-    setTimeout(()=> {
-      getTabsDomInfo();
-    }, 1000)
   };
 
   usePageScroll((scroll) => {
-    console.log(".current", refContainer.current);
+    // console.log(".current", refContainer.current);
     if (scroll.scrollTop >= menuTop - 75) {
       !fixedTabs && setFixedTabsStatus(true);
     } else {
@@ -122,15 +118,42 @@ const CourseDetail = (props) => {
     query.select(".detail-menu");
     query.selectViewport().scrollOffset();
     query.exec(function (res) {
+      console.log("res[0].scrollHeight", res[0].scrollHeight);
       setMenuTop(res[0].scrollHeight); // .detail-menu节点的上边界坐标
     });
 
-    query.selectAll(".detail-menu .tab").boundingClientRect();
+    query.selectAll(".detail-menu .tab");
     query.selectViewport().scrollOffset();
     query.exec(function (res) {
       console.log("select-all", res);
     });
   };
+
+  const calcDetailImgsPosition: Function = () => {
+    const query = Taro.createSelectorQuery();
+    query.selectAll(".img.detailImg");
+    query.selectViewport().scrollOffset();
+    query.exec(function (res) {
+      console.log("detailImg-select-all", res);
+    });
+  };
+
+  const detaiImgOnload: Function = (imgProps) => {
+    console.log("img onload", imgProps);
+    setImgOnload(true);
+  };
+
+  useEffect(() => {
+    !isLoading &&
+      imgOnload &&
+      setTimeout(() => {
+        calcDetailImgsPosition();
+      }, 3000);
+  }, [imgOnload, isLoading]);
+
+  useReady(() => {
+    getTabsDomInfo();
+  });
 
   if (isLoading) return <View></View>;
   return (
@@ -231,7 +254,8 @@ const CourseDetail = (props) => {
                 src={"https://s6.pipacode.cn/b6d02201912231937443484.jpg"}
                 mode="widthFix"
                 onError={() => ""}
-                className="img"
+                onLoad={(item) => detaiImgOnload(item)}
+                className="img detailImg"
               ></Image>
             );
           })}
