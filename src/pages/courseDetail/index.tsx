@@ -130,8 +130,9 @@ const CourseDetail = (props) => {
   };
 
   const calcDetailImgsPosition: Function = () => {
-    const query = Taro.createSelectorQuery();
-    query.selectAll(".img.detailImg");
+    const query = this.createSelectorQuery();
+    query.selectAll(".detailImg");
+    console.log("query", query);
     query.selectViewport().scrollOffset();
     query.exec(function (res) {
       console.log("detailImg-select-all", res);
