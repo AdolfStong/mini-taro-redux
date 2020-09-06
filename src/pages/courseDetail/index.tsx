@@ -13,7 +13,6 @@ import "./index.scss";
 import Api from "@/api";
 
 const CourseDetail = (props) => {
-  console.log("props", props);
   const [isLoading, setLoadingStatus] = useState<boolean>(true);
   const [courseId, setCourseId] = useState<string>("");
   const [tabActiveIndex, setTabActiveIndex] = useState<number>(0);
