@@ -1,4 +1,177 @@
-.index {
-  flex-direction: column;
-  width: 100%;
+.myLogin {
+  height: 100%;
+  position: absolute !important;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  .header {
+    height: 420px;
+    width: 100%;
+    background: linear-gradient(90deg, #17ead9, #6078ea);
+    .header-img {
+      width: 750px;
+      height: 420px;
+      display: none;
+    }
+  }
+  .section {
+    display: flex;
+    justify-content: center;
+    .input-box {
+      background: #fff;
+      width: 600px;
+      padding: 40px;
+      box-sizing: border-box;
+      box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.1);
+      border-radius: 20px;
+      position: relative;
+      top: -80px;
+      .logo {
+        margin-bottom: 20px;
+        text-align: center;
+        .logo-img {
+          width: 140px;
+          height: 140px;
+          border-radius: 50%;
+        }
+      }
+      .input-list {
+        .phone {
+          height: 100px;
+          box-sizing: border-box;
+          display: flex;
+          align-items: center;
+          position: relative;
+          border-bottom: 3px solid #efeff4;
+          .phone-img {
+            width: 26px;
+            height: 32px;
+            position: absolute;
+            top: 50%;
+            left: 20px;
+            transform: translateY(-50%);
+          }
+          .phone-input {
+            padding-left: 64px;
+            width: 100%;
+          }
+        }
+        .code {
+          height: 100px;
+          box-sizing: border-box;
+          display: flex;
+          align-items: center;
+          position: relative;
+          border-bottom: 2px solid #efeff4;
+          .code-img {
+            width: 26px;
+            height: 30px;
+            position: absolute;
+            top: 50%;
+            left: 20px;
+            transform: translateY(-50%);
+          }
+          .code-input {
+            width: 288px;
+            padding-left: 64px;
+          }
+          .get-code-btn {
+            height: 42px;
+            padding: 0 22px;
+            font-size: 24px;
+            font-family: PingFangSC-Regular;
+            font-weight: 400;
+            color: rgba(96, 120, 234, 1);
+            line-height: 18px;
+            border: 2px solid rgba(91, 127, 233, 1);
+            border-radius: 8px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+          }
+          .get-again {
+            height: 42px;
+            margin-left: 40px;
+            padding: 0 10px;
+            border: 2px solid rgba(199, 199, 204, 1);
+            border-radius: 16px;
+            font-size: 24px;
+            font-family: PingFangSC-Regular;
+            font-weight: 400;
+            color: rgba(199, 199, 204, 1);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+          }
+        }
+        .choice {
+          display: flex;
+          align-items: center;
+          padding-left: 20px;
+          margin-bottom: 104px;
+          margin-top: 20px;
+          .img-box {
+            display: flex;
+            align-items: center;
+            position: relative;
+            .border-line {
+              width: 20px;
+              height: 20px;
+              border: 2px solid rgba(159, 162, 172, 1);
+              border-radius: 2px;
+              &.no-border {
+                border: none;
+              }
+            }
+            .word {
+              padding-left: 20px;
+            }
+            .check-input {
+              display: none;
+            }
+            // img {
+            //   position: absolute;
+            //   left: 1px;
+            //   height: 1px;
+            //   width: 18px;
+            //   height: 18px;
+            // }
+          }
+        }
+      }
+      .register-btn {
+        width: 480px;
+        height: 80px;
+        background: linear-gradient(
+          90deg,
+          rgba(23, 234, 217, 1),
+          rgba(96, 120, 234, 1)
+        );
+        border-radius: 40px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: 30px;
+        font-family: SourceHanSansCN-Regular;
+        font-weight: 400;
+        color: #fff;
+        z-index: 999;
+      }
+    }
+  }
+  .footer {
+    position: absolute;
+    bottom: 0;
+    height: 271px;
+    width: 100%;
+    .tooter-img {
+      width: 100%;
+      height: 100%;
+      vertical-align: middle;
+    }
+  }
 }

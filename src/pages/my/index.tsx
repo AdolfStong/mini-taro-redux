@@ -1,79 +1,119 @@
-import React, { Component } from 'react'
-import { connect } from 'react-redux'
-import { View, Button, Text } from '@tarojs/components'
+import Taro from "@tarojs/taro";
+import React, { useState } from "react";
+import { connect } from "react-redux";
+import { View, Image, Input } from "@tarojs/components";
 
-import { add, minus, asyncAdd } from '../../actions/counter'
+import "./index.scss";
 
-import './index.scss'
+import headerImg from "@/resource/images/header-bg.png";
+import phoneIcon from "@/resource/images/phone-icon.png";
+import saveIcon from "@/resource/images/save-icon.png";
+import bottomBg from "@/resource/images/bottom-bg.png";
 
-// #region 书写注意
-//
-// 目前 typescript 版本还无法在装饰器模式下将 Props 注入到 Taro.Component 中的 props 属性
-// 需要显示声明 connect 的参数类型并通过 interface 的方式指定 Taro.Component 子类的 props
-// 这样才能完成类型检查和 IDE 的自动提示
-// 使用函数模式则无此限制
-// ref: https://github.com/DefinitelyTyped/DefinitelyTyped/issues/20796
-//
-// #endregion
+import { setLoginInfo } from "@/src/actions/login";
 
-type PageStateProps = {
-  counter: {
-    num: number
-  }
-}
+const LoginInfo = (props) => {
+  console.log("props", props);
+  const { setLogin, loginInfo } = props;
+  const [mobile, setMobile] = useState<string>("15591611037");
+  const [code, setCode] = useState<string>("8510");
 
-type PageDispatchProps = {
-  add: () => void
-  dec: () => void
-  asyncAdd: () => any
-}
+  const loginHandle: Function = async () => {
+    Taro.showLoading({
+      title: "加载中",
+    });
+    console.log(mobile, code);
 
-type PageOwnProps = {}
+    setTimeout(() => {
+      const data = {
+        id: "13",
+        mobile: "13321193432",
+      };
+      setLogin(data);
 
-type PageState = {}
+      Taro.hideLoading();
+      setTimeout(() => {
+        console.log("props", props);
+      }, 2000);
+    }, 1000);
+  };
 
-type IProps = PageStateProps & PageDispatchProps & PageOwnProps
+  // const inputHandle: Function = (taroE: any) => {
+  //   const {
+  //     detail: { value = "" },
+  //   } = taroE;
+  //   console.log(value, "value");
+  //   // setMobile(event.target.value)
+  // };
 
-interface Index {
-  props: IProps;
-}
-
-@connect(({ counter }) => ({
-  counter
-}), (dispatch) => ({
-  add () {
-    dispatch(add())
-  },
-  dec () {
-    dispatch(minus())
-  },
-  asyncAdd () {
-    dispatch(asyncAdd())
-  }
-}))
-class Index extends Component {
-  componentWillReceiveProps (nextProps) {
-    console.log(this.props, nextProps)
-  }
-
-  componentWillUnmount () { }
-
-  componentDidShow () { }
-
-  componentDidHide () { }
-
-  render () {
-    return (
-      <View className='index'>
-        <Button className='add_btn' onClick={this.props.add}>+</Button>
-        <Button className='dec_btn' onClick={this.props.dec}>-</Button>
-        <Button className='dec_btn' onClick={this.props.asyncAdd}>async</Button>
-        <View><Text>{this.props.counter.num}</Text></View>
-        <View><Text>Hello, World</Text></View>
+  return (
+    <View className="myLogin">
+      <View className="header">
+        <Image src={headerImg} className="header-img" mode="widthFix" />
       </View>
-    )
-  }
-}
+      <View className="section">
+        <View className="input-box">
+          <View className="logo">
+            <Image src={headerImg} className="logo-img" />
+          </View>
+          <View className="input-list">
+            <View className="phone">
+              <Image src={phoneIcon} className="phone-img" mode="widthFix" />
+              <Input
+                className="phone-input"
+                type="number"
+                value={mobile}
+                name="mobile"
+                onInput={(event) => setMobile(event.detail.value)}
+                placeholder="请输入手机号"
+              />
+            </View>
+            <View className="code">
+              <Image src={saveIcon} className="code-img" mode="widthFix" />
+              <Input
+                type="number"
+                className="code-input"
+                value={code}
+                onInput={(event) => setCode(event.detail.value)}
+                placeholder="验证码"
+              />
+              <View className="get-code-btn">获取验证码</View>
+              {/* <span v-else className="get-again">重新发送{{cutDown}}秒</span> */}
+            </View>
+            <View className="choice">
+              <View className="img-box">
+                <View className="border-line"></View>
+                <View className="word">本人已阅读并同意</View>
+                {/* <img
+                  className=icon}
+                  src="/static/images/choice-icon.png"
+                /> */}
+                {/* <Input className="check-input" type="hidden" /> */}
+              </View>
+              <View className="xieyi">《用户协议》</View>
+            </View>
+          </View>
+          <View className="register-btn" onClick={() => loginHandle()}>
+            登录
+          </View>
+        </View>
+      </View>
+      <View>{loginInfo.mobile}</View>
 
-export default Index
+      <View className="footer">
+        <Image className="tooter-img" src={bottomBg} mode="widthFix" />
+      </View>
+    </View>
+  );
+};
 
+export default connect(
+  ({ loginInfo }) => ({
+    loginInfo,
+  }),
+  (dispatch) => ({
+    setLogin(data) {
+      dispatch(setLoginInfo(data));
+    },
+  })
+)(LoginInfo);
