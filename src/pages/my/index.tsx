@@ -1,6 +1,7 @@
 import Taro from "@tarojs/taro";
 import React, { useState } from "react";
 import { connect } from "react-redux";
+
 import { View, Image, Input } from "@tarojs/components";
 
 import "./index.scss";
@@ -10,15 +11,18 @@ import phoneIcon from "@/resource/images/phone-icon.png";
 import saveIcon from "@/resource/images/save-icon.png";
 import bottomBg from "@/resource/images/bottom-bg.png";
 
-import { setLoginInfo } from "@/src/actions/login";
+import { setLogin } from "@/src/actions/login";
 
 const LoginInfo = (props) => {
   console.log("props", props);
-  const { setLogin, loginInfo } = props;
-  const [mobile, setMobile] = useState<string>("15591611037");
-  const [code, setCode] = useState<string>("8510");
+  const { setLogin } = props;
+  const [mobile, setMobile] = useState<string>("");
+  const [code, setCode] = useState<string>("");
 
   const loginHandle: Function = async () => {
+    const validate = judgeFromData();
+    if (!validate) return;
+
     Taro.showLoading({
       title: "加载中",
     });
@@ -26,16 +30,37 @@ const LoginInfo = (props) => {
 
     setTimeout(() => {
       const data = {
-        id: "13",
-        mobile: "13321193432",
+        id: code,
+        mobile,
       };
       setLogin(data);
 
       Taro.hideLoading();
-      setTimeout(() => {
-        console.log("props", props);
-      }, 2000);
+
+      Taro.switchTab({
+        url: "/pages/index/index",
+      });
     }, 1000);
+  };
+
+  const msgToast: Function = (title: string) => {
+    Taro.showToast({
+      title,
+      icon: "none",
+      duration: 2000,
+    });
+  };
+
+  const judgeFromData: Function = () => {
+    if (!mobile || !code) {
+      msgToast("请输入手机号和验证码");
+      return 0;
+    }
+    if (!/1[0-9]{10}/.test(mobile)) {
+      msgToast("请输入正确的手机号");
+      return 0;
+    }
+    return 1;
   };
 
   // const inputHandle: Function = (taroE: any) => {
@@ -98,8 +123,6 @@ const LoginInfo = (props) => {
           </View>
         </View>
       </View>
-      <View>{loginInfo.mobile}</View>
-
       <View className="footer">
         <Image className="tooter-img" src={bottomBg} mode="widthFix" />
       </View>
@@ -107,13 +130,10 @@ const LoginInfo = (props) => {
   );
 };
 
-export default connect(
-  ({ loginInfo }) => ({
-    loginInfo,
-  }),
-  (dispatch) => ({
-    setLogin(data) {
-      dispatch(setLoginInfo(data));
-    },
-  })
-)(LoginInfo);
+const mapStateToProps = (state) => ({ loginInfo: state.loginInfo });
+
+const mapDispatchToProps = (dispatch) => ({
+  setLogin: (data) => dispatch(setLogin(data)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(LoginInfo);
