@@ -12,6 +12,7 @@ import saveIcon from "@/resource/images/save-icon.png";
 import bottomBg from "@/resource/images/bottom-bg.png";
 
 import { setLogin } from "@/src/actions/login";
+import { showToast } from "@/src/tools/wxApi";
 
 const LoginInfo = (props) => {
   console.log("props", props);
@@ -26,8 +27,7 @@ const LoginInfo = (props) => {
     Taro.showLoading({
       title: "加载中",
     });
-    console.log(mobile, code);
-
+    /** 模拟登陆接口 */
     setTimeout(() => {
       const data = {
         id: code,
@@ -43,21 +43,13 @@ const LoginInfo = (props) => {
     }, 1000);
   };
 
-  const msgToast: Function = (title: string) => {
-    Taro.showToast({
-      title,
-      icon: "none",
-      duration: 2000,
-    });
-  };
-
   const judgeFromData: Function = () => {
     if (!mobile || !code) {
-      msgToast("请输入手机号和验证码");
+      showToast("请输入手机号和验证码");
       return 0;
     }
     if (!/1[0-9]{10}/.test(mobile)) {
-      msgToast("请输入正确的手机号");
+      showToast("请输入正确的手机号");
       return 0;
     }
     return 1;
