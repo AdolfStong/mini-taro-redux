@@ -4,16 +4,23 @@ import interceptors from "./interceptors";
 
 interceptors.forEach((i) => Taro.addInterceptor(i));
 
+// interface RequstOpt {
+//   url: string;
+//   data: any;
+//   method: "get" | "post" | "delete" | "put";
+//   header: Header;
+// }
+
 class httpRequest {
-  baseOptions(params, method = "GET") {
+  baseOptions(params, method) {
     let { url, data } = params;
-    const BASE_URL = getBaseUrl(url);
-    let contentType = "application/json";
-    contentType = params.contentType || contentType;
+    const BASE_URL = getBaseUrl();
+
+    const contentType = params.contentType || "application/json";
     const option = {
       url: BASE_URL + url,
-      data: data,
-      method: method,
+      data,
+      method,
       header: {
         "content-type": contentType,
         Authorization: Taro.getStorageSync("Authorization"),
@@ -24,7 +31,7 @@ class httpRequest {
 
   get(url, data = "") {
     let option = { url, data };
-    return this.baseOptions(option);
+    return this.baseOptions(option, "GET");
   }
 
   post(url, data, contentType) {

@@ -4,7 +4,7 @@
  * @Author: Shentong
  * @Date: 2020-08-03 15:26:57
  * @LastEditors: Shentong
- * @LastEditTime: 2020-08-28 17:31:03
+ * @LastEditTime: 2020-09-23 21:06:34
  */
 const path = require("path");
 
@@ -23,8 +23,8 @@ const config = {
   defineConstants: {},
   alias: {
     "@/api": path.resolve(__dirname, "..", "api"),
-    "@/resource": path.resolve(__dirname, "..", "src/resource"),
     "@/src": path.resolve(__dirname, "..", "src"),
+    "@/servers": path.resolve(__dirname, "..", "servers"),
     "@/resource": path.resolve(__dirname, "..", "src/resource"),
     "@/constants": path.resolve(__dirname, "..", "src/constants"),
     "@/components": path.resolve(__dirname, "..", "src/components"),

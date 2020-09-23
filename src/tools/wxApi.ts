@@ -4,13 +4,13 @@
  * @Author: Shentong
  * @Date: 2020-09-17 18:23:05
  * @LastEditors: Shentong
- * @LastEditTime: 2020-09-18 15:53:55
+ * @LastEditTime: 2020-09-23 18:02:51
  */
 import Taro from "@tarojs/taro";
 
 type ToastIcon = "success" | "loading" | "none";
 
-// TODO:
+//
 declare namespace wxApi {
   namespace showToast {
     interface Option {

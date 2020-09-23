@@ -10,6 +10,8 @@ import "./index.scss";
 
 import Api from "@/api";
 
+import { getIndex } from "@/servers/servers";
+
 interface Tab {
   id: string;
   title: string;
@@ -38,27 +40,22 @@ const Index = () => {
   };
 
   // 获取首页”精选“下数据接口
-  const getIndexInfo = () => {
-    Taro.request({
-      url: Api.getIndex(),
-      success: function (res) {
-        let {
-          data: {
-            data: { banner = [], labels = [], operation_list: operationList },
-          } = {},
-        } = res;
+  const getIndexInfo: Function = async () => {
+    const indexData = await getIndex();
+    let {
+      data: { banner = [], labels = [], operation_list: optList = [] } = {},
+    } = indexData;
 
-        operationList.sort(compare("sort"));
-        operationList = operationList.filter(
-          (opt) => opt.show_type !== 1 && opt.show_type !== 4
-        );
+    optList.sort(compare("sort"));
+    optList = optList.filter(
+      (opt) => opt.show_type !== 1 && opt.show_type !== 4
+    );
 
-        setBanner(banner);
-        setLabels(labels);
-        setOperationList(operationList);
-      },
-    });
+    setBanner(banner);
+    setLabels(labels);
+    setOperationList(optList);
   };
+
   // 《大家都在看》 分页
   const getIndexPage = (start: number, successCallback: Function) => {
     Taro.request({

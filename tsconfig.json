@@ -22,6 +22,7 @@
     "typeRoots": ["node_modules/@types", "global.d.ts"],
     "paths": {
       "@/api/*": ["./api/*"],
+      "@/servers/*": ["./servers/*"],
       "@/src/*": ["./src/*"],
       "@/constants/*": ["./src/constants/*"],
       "@/resource/*": ["./src/resource/*"],
