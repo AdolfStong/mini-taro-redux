@@ -16,7 +16,13 @@ interface Tab {
   id: string;
   title: string;
 }
-
+function areEqual(prevProps, nextProps) {
+  if (prevProps.seconds === nextProps.seconds) {
+    return true;
+  } else {
+    return false;
+  }
+}
 const Index = () => {
   const [tabIndex, setTabIndex] = useState<Number>(0);
   const [banner, setBanner] = useState<Array<any>>([]);
@@ -148,5 +154,9 @@ const Index = () => {
     </View>
   );
 };
+// const Index = () => {
+
+// };
 
 export default Index;
+// export default Taro.memo(Index, areEqual);
