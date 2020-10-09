@@ -34,10 +34,8 @@ const OtherCourse = (props: Props) => {
       url: Api.getLabelDetail(),
       data: { id },
     });
-
-    let {
-      data: { data: { hot = [], all = [], recommend = {} } } = {},
-    } = result;
+    console.log("result", result);
+    let { data: { hot = [], all = [], recommend = {} } = {} } = result;
 
     setHotCourse(hot);
     setAllCourse(all);

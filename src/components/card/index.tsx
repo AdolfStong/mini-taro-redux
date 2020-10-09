@@ -60,5 +60,6 @@ const Card = (props: CardItemContainer) => {
     </View>
   );
 };
-
-export default Card;
+console.log('---',React.memo)
+export default React.memo(Card);
+// export default Card;
