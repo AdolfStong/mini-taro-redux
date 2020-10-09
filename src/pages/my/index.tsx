@@ -17,8 +17,8 @@ import { showToast } from "@/src/tools/wxApi";
 const LoginInfo = (props) => {
   console.log("props", props);
   const { setLogin } = props;
-  const [mobile, setMobile] = useState<string>("");
-  const [code, setCode] = useState<string>("");
+  const [mobile, setMobile] = useState<string>("15591611037");
+  const [code, setCode] = useState<string>("961211");
 
   const loginHandle: Function = async () => {
     const validate = judgeFromData();

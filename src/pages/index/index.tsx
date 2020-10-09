@@ -1,5 +1,7 @@
 import Taro, { useReachBottom } from "@tarojs/taro";
 import React, { useState, useEffect } from "react";
+// import { connect } from "react-redux";
+import { useSelector } from "react-redux";
 import { View, Image } from "@tarojs/components";
 import Nav from "./components/nav";
 import Banner from "./components/banner";
@@ -19,7 +21,9 @@ interface Tab {
 function areEqual(prevProps, nextProps) {
   return prevProps.seconds === nextProps.seconds;
 }
-const Index = () => {
+const Index = (props) => {
+  console.log("index-props", props);
+  // const [loginInfo, setLoginInfo] = useState<any>(lgInfo);
   const [tabIndex, setTabIndex] = useState<Number>(0);
   const [banner, setBanner] = useState<Array<any>>([]);
   const [labels, setLabels] = useState<Array<any>>([]);
@@ -32,6 +36,9 @@ const Index = () => {
     setTabIndex(curTab);
     setTabInfo(tab);
   };
+  // redux中的loginInfo信息回显 TODO:
+  const information = useSelector((state) => state.loginInfo);
+  console.log("information", information);
 
   const compare: Function = (property: string) => {
     return function (a, b) {
@@ -155,4 +162,12 @@ const Index = () => {
 // };
 
 export default Index;
+
+// const mapStateToProps = (state) => ({ loginInfo: state.loginInfo });
+
+// const mapDispatchToProps = (dispatch) => ({
+//   setLogin: (data) => dispatch(setLogin(data)),
+// });
+
+// export default connect(mapStateToProps, mapDispatchToProps)(Index);
 // export default Taro.memo(Index, () => true);
