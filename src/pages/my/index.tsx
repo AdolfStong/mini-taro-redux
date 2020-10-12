@@ -1,22 +1,26 @@
 import Taro from "@tarojs/taro";
 import React, { useState } from "react";
-import { connect } from "react-redux";
+import { connect, useSelector } from "react-redux";
 
 import { View, Image, Input } from "@tarojs/components";
 
 import "./index.scss";
+
+import Authorization from "@/components/authorization";
 
 import headerImg from "@/resource/images/header-bg.png";
 import phoneIcon from "@/resource/images/phone-icon.png";
 import saveIcon from "@/resource/images/save-icon.png";
 import bottomBg from "@/resource/images/bottom-bg.png";
 
-import { setLogin } from "@/src/actions/login";
+import { dispetchLogin } from "@/src/actions/login";
+import { updateUserInfo } from "@/src/actions/user";
+
 import { showToast } from "@/src/tools/wxApi";
 
 const LoginInfo = (props) => {
   console.log("props", props);
-  const { setLogin } = props;
+  const { setLogin, upUserInfo } = props;
   const [mobile, setMobile] = useState<string>("15591611037");
   const [code, setCode] = useState<string>("961211");
 
@@ -54,6 +58,12 @@ const LoginInfo = (props) => {
     }
     return 1;
   };
+
+  // redux中的loginInfo信息回显 TODO:
+  const userAuhorInfo = useSelector((state) => state.userInfo);
+  console.log("userAuhorInfo", userAuhorInfo);
+
+  const authorzationCb: Function = (res) => upUserInfo(res);
 
   // const inputHandle: Function = (taroE: any) => {
   //   const {
@@ -115,6 +125,8 @@ const LoginInfo = (props) => {
           </View>
         </View>
       </View>
+      <Authorization type={1} authorCb={authorzationCb}></Authorization>
+      {userAuhorInfo.nickName}
       <View className="footer">
         <Image className="tooter-img" src={bottomBg} mode="widthFix" />
       </View>
@@ -122,10 +134,15 @@ const LoginInfo = (props) => {
   );
 };
 
-const mapStateToProps = (state) => ({ loginInfo: state.loginInfo });
+const mapStateToProps = (state) => {
+  const { loginInfo, userInfo } = state;
+
+  return { loginInfo, userInfo };
+};
 
 const mapDispatchToProps = (dispatch) => ({
-  setLogin: (data) => dispatch(setLogin(data)),
+  setLogin: (data) => dispatch(dispetchLogin(data)),
+  upUserInfo: (data) => dispatch(updateUserInfo(data)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(LoginInfo);

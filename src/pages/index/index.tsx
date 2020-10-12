@@ -157,17 +157,5 @@ const Index = (props) => {
     </View>
   );
 };
-// const Index = () => {
-
-// };
 
 export default Index;
-
-// const mapStateToProps = (state) => ({ loginInfo: state.loginInfo });
-
-// const mapDispatchToProps = (dispatch) => ({
-//   setLogin: (data) => dispatch(setLogin(data)),
-// });
-
-// export default connect(mapStateToProps, mapDispatchToProps)(Index);
-// export default Taro.memo(Index, () => true);
