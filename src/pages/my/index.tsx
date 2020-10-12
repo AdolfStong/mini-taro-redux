@@ -81,7 +81,11 @@ const LoginInfo = (props) => {
       <View className="section">
         <View className="input-box">
           <View className="logo">
-            <Image src={headerImg} className="logo-img" />
+            <Image
+              src={userAuhorInfo.avatarUrl || headerImg}
+              className="logo-img"
+            />
+            {userAuhorInfo.nickName}
           </View>
           <View className="input-list">
             <View className="phone">
@@ -126,7 +130,7 @@ const LoginInfo = (props) => {
         </View>
       </View>
       <Authorization type={1} authorCb={authorzationCb}></Authorization>
-      {userAuhorInfo.nickName}
+
       <View className="footer">
         <Image className="tooter-img" src={bottomBg} mode="widthFix" />
       </View>
@@ -136,7 +140,7 @@ const LoginInfo = (props) => {
 
 const mapStateToProps = (state) => {
   const { loginInfo, userInfo } = state;
-
+  console.log(state);
   return { loginInfo, userInfo };
 };
 

@@ -4,7 +4,7 @@
  * @Author: Shentong
  * @Date: 2020-08-10 18:58:33
  * @LastEditors: Shentong
- * @LastEditTime: 2020-10-12 18:39:21
+ * @LastEditTime: 2020-10-12 20:40:39
  */
 
 import { UPDATE_USER, UPDATE_USER_INFO } from "../constants/counter";
@@ -24,7 +24,7 @@ export function userInfo(state = USER_INFO, action) {
     case UPDATE_USER_INFO:
       return {
         ...state,
-        ...action.payLoad,
+        ...action.data,
       };
     default:
       return state;

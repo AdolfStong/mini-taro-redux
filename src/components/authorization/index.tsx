@@ -58,8 +58,8 @@ const Disnet = (props: Props) => {
         province = "",
       } = {},
     } = e;
-    console.log(
-      "get-user-info",
+
+    authorCb({
       encryptedData,
       avatarUrl,
       city,
@@ -67,11 +67,7 @@ const Disnet = (props: Props) => {
       gender,
       nickName,
       language,
-      province
-    );
-    authorCb({
-      avatarUrl,
-      nickName,
+      province,
     });
   };
 
