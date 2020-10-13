@@ -6,7 +6,7 @@
  * @LastEditors: Shentong
  * @LastEditTime: 2020-09-15 21:33:05
  */
-import { SET_LOGIN_INFO } from "../constants/counter";
+import { SET_LOGIN_INFO } from "../constants/varlate";
 
 const BASE_INFO = {};
 

@@ -1,25 +1,25 @@
 Arguments: 
-  /Users/adolfvictor/.nvm/versions/node/v11.12.0/bin/node /Users/adolfvictor/.nvm/versions/node/v11.12.0/bin/yarn biuld
+  /Users/admin/.nvm/versions/node/v14.5.0/bin/node /usr/local/Cellar/yarn/1.22.4/libexec/bin/yarn.js dev
 
 PATH: 
-  /Users/adolfvictor/.nvm/versions/node/v11.12.0/bin:/Library/Java/JavaVirtualMachines/jdk1.8.0_221.jdk/Contents/Home/bin:/Users/adolfvictor/apache-maven-3.5.3/bin:/usr/local/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Library/Java/JavaVirtualMachines/jdk1.8.0_221.jdk/Contents/Home/bin:/Users/adolfvictor/apache-maven-3.5.3/bin:/Users/adolfvictor/Library/Android/sdk/tools:/Users/adolfvictor/Library/Android/sdk/tools/bin:/Users/adolfvictor/Library/Android/sdk/platform-tools:/Users/adolfvictor/Library/Android/sdk/emulator:.:/Users/adolfvictor/Library/Android/sdk/tools:/Users/adolfvictor/Library/Android/sdk/tools/bin:/Users/adolfvictor/Library/Android/sdk/platform-tools:/Users/adolfvictor/Library/Android/sdk/emulator:.
+  /usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/admin/.nvm/versions/node/v14.5.0/bin
 
 Yarn version: 
-  1.13.0
+  1.22.4
 
 Node version: 
-  11.12.0
+  14.5.0
 
 Platform: 
   darwin x64
 
 Trace: 
-  SyntaxError: /Users/adolfvictor/gitHubProject/react/mini-taro-redux/package.json: Unexpected token } in JSON at position 1100
+  SyntaxError: /Users/admin/shentong/adolf/react/mini-taro-redux/package.json: Unexpected token / in JSON at position 1082
       at JSON.parse (<anonymous>)
-      at /Users/adolfvictor/.nvm/versions/node/v11.12.0/lib/node_modules/yarn/lib/cli.js:1625:59
+      at /usr/local/Cellar/yarn/1.22.4/libexec/lib/cli.js:1625:59
       at Generator.next (<anonymous>)
-      at step (/Users/adolfvictor/.nvm/versions/node/v11.12.0/lib/node_modules/yarn/lib/cli.js:304:30)
-      at /Users/adolfvictor/.nvm/versions/node/v11.12.0/lib/node_modules/yarn/lib/cli.js:315:13
+      at step (/usr/local/Cellar/yarn/1.22.4/libexec/lib/cli.js:310:30)
+      at /usr/local/Cellar/yarn/1.22.4/libexec/lib/cli.js:321:13
 
 npm manifest: 
   {
@@ -51,8 +51,8 @@ npm manifest:
       "dev:qq": "npm run build:qq -- --watch",
       "dev:jd": "npm run build:jd -- --watch",
       "dev:quickapp": "npm run build:quickapp -- --watch",
-      "dev": "npm run build:weapp -- --watch",
-      "build": "taro build --type weapp",
+      "dev": "NODE_ENV=production taro build --type weapp --watch"
+      // "dev": "npm run build:weapp -- --watch"
     },
     "browserslist": [
       "last 3 versions",

@@ -63,7 +63,7 @@ const LoginInfo = (props) => {
   const userAuhorInfo = useSelector((state) => state.userInfo);
   console.log("userAuhorInfo", userAuhorInfo);
 
-  const authorzationCb: Function = (res) => upUserInfo(res);
+  // const authorzationCb: Function = (res) => upUserInfo(res);
 
   // const inputHandle: Function = (taroE: any) => {
   //   const {
@@ -129,8 +129,16 @@ const LoginInfo = (props) => {
           </View>
         </View>
       </View>
-      <Authorization type={1} authorCb={authorzationCb}></Authorization>
-
+      {/* getUserInfo */}
+      <Authorization
+        type={1}
+        authorCb={(res) => upUserInfo(res)}
+      ></Authorization>
+      {/* getPhoneNumber */}
+      <Authorization
+        type={2}
+        authorCb={(res) => upUserInfo(res)}
+      ></Authorization>
       <View className="footer">
         <Image className="tooter-img" src={bottomBg} mode="widthFix" />
       </View>
@@ -140,7 +148,6 @@ const LoginInfo = (props) => {
 
 const mapStateToProps = (state) => {
   const { loginInfo, userInfo } = state;
-  console.log(state);
   return { loginInfo, userInfo };
 };
 

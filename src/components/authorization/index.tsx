@@ -14,13 +14,15 @@ interface Props {
   authorCb: Function;
 }
 
-const Disnet = (props: Props) => {
+const Authorization = (props: Props) => {
+  const [isShowModal, setIsShowModal] = useState<boolean>(false);
   const { type = 1, authorCb } = props;
 
   useEffect(() => {
     const type = "scope.userInfo";
     const authorSucceses: Function = async () => {
       let uInfo = await Taro.getUserInfo();
+      console.log("uInfo", uInfo);
       getUserInfoHandle(uInfo);
     };
     // 如果用户已经授权过了，可以直接调用
@@ -29,7 +31,7 @@ const Disnet = (props: Props) => {
 
   /**
    *
-   * @param type 需要授权的‘是scope'
+   * @param type 需要授权的‘scope'
    * @param cb  授权成功后的回调
    */
   const definedAuthorization: Function = (type: string, cb?: Function) => {
@@ -38,53 +40,67 @@ const Disnet = (props: Props) => {
         if (res.authSetting[type]) {
           // 已经授权过啦
           cb && cb();
+        } else {
+          setIsShowModal(true);
         }
       },
     });
   };
   // 获取用户信息
-  const getUserInfoHandle: Function = (e) => {
-    if (e.errMsg.indexOf(":ok") === -1) return;
-
+  const getUserInfoHandle: Function = (detail) => {
     const {
-      encryptedData = "", // 敏感信息
-      userInfo: {
-        avatarUrl = "",
-        city = "",
-        country = "",
-        gender = "",
-        nickName = "",
-        language = "",
-        province = "",
-      } = {},
-    } = e;
+      errMsg,
+      encryptedData, // 敏感信息
+      signature,
+      userInfo = {},
+    } = detail;
 
-    authorCb({
-      encryptedData,
-      avatarUrl,
-      city,
-      country,
-      gender,
-      nickName,
-      language,
-      province,
-    });
+    if (errMsg.indexOf(":ok") === -1) return;
+
+    if (encryptedData && signature) {
+      authorCb(userInfo);
+      setIsShowModal(false);
+    } else {
+      setIsShowModal(true);
+    }
+  };
+
+  // 获取手机号
+  const getPhoneNumberHandle: Function = (detail) => {
+    const { encryptedData, errMsg, iv } = detail;
+
+    if (errMsg.indexOf(":ok") === -1) return;
+
+    if (encryptedData && iv) {
+      console.log("获取手机号", detail);
+    }
   };
 
   return (
     <View className="authorization">
       {/* 获取用户信息：getUserInfo */}
-      {type == 1 && (
-        <Button
-          className="btn"
-          open-type="getUserInfo"
-          onGetUserInfo={(e) => getUserInfoHandle(e.detail)}
-        >
-          getUserInfo
-        </Button>
-      )}
+      {/* 获取手机号：getPhoneNumber */}
+      {isShowModal ? (
+        type == 1 ? (
+          <Button
+            className="btn"
+            openType="getUserInfo"
+            onGetUserInfo={(e) => getUserInfoHandle(e.detail)}
+          >
+            getUserInfo
+          </Button>
+        ) : (
+          <Button
+            className="btn"
+            openType="getPhoneNumber"
+            onGetPhoneNumber={(e) => getPhoneNumberHandle(e.detail)}
+          >
+            getPhoneNumber
+          </Button>
+        )
+      ) : null}
     </View>
   );
 };
 
-export default Disnet;
+export default Authorization;
