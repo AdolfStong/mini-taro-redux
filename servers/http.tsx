@@ -2,6 +2,8 @@ import Taro from "@tarojs/taro";
 import getBaseUrl from "./baseUrl";
 import interceptors from "./interceptors";
 
+import TaroRequst from './requst'
+
 interceptors.forEach((i) => Taro.addInterceptor(i));
 
 // interface RequstOpt {
@@ -10,6 +12,11 @@ interceptors.forEach((i) => Taro.addInterceptor(i));
 //   method: "get" | "post" | "delete" | "put";
 //   header: Header;
 // }
+interface HttpRespnseType {
+  [key: string]: any;
+  code: number
+  msg: string
+}
 
 class httpRequest {
   baseOptions(params, method) {
@@ -26,7 +33,7 @@ class httpRequest {
         Authorization: Taro.getStorageSync("Authorization"),
       },
     };
-    return Taro.request(option);
+    return TaroRequst<HttpRespnseType>(option);
   }
 
   get(url, data = {}) {
@@ -35,8 +42,8 @@ class httpRequest {
   }
 
   post(url, data, contentType) {
-    let params = { url, data, contentType };
-    return this.baseOptions(params, "POST");
+    let option = { url, data, contentType };
+    return this.baseOptions(option, "POST");
   }
 
   put(url, data = "") {

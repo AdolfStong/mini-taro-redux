@@ -1,6 +1,10 @@
 import Taro from "@tarojs/taro";
 import React, { useState } from "react";
 import { connect, useSelector } from "react-redux";
+import Test from "@/src/tools/test";
+
+console.log(Test, "test");
+// Test();
 
 import { View, Image, Input } from "@tarojs/components";
 

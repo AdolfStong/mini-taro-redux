@@ -15,7 +15,7 @@ const getBaseUrl = () => {
     // } else if (url.includes("/iatadatabase/")) {
     //   BASE_URL = "";
     // }
-    BASE_URL = "https://live.xdsxt.com/api_v3";
+    BASE_URL = "https://m.xdsxt.com/api_v3";
   }
   return BASE_URL;
 };
