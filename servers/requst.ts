@@ -4,7 +4,7 @@
  * @Author: Shentong
  * @Date: 2020-10-21 15:51:32
  * @LastEditors: Shentong
- * @LastEditTime: 2020-10-21 16:32:28
+ * @LastEditTime: 2020-10-22 15:47:11
  */
 import Taro from '@tarojs/taro';
 import { showToast } from "@/src/tools/wxApi";
@@ -29,7 +29,7 @@ type HTTPMedthods =
 export default function<T> (args: RequstOpt) : Promise<T> {
     const {url, data, method, header } = args
     
-    return new Promise<T> ((resolve, reject) => {
+    return new Promise ((resolve, reject) => {
         Taro.request({
             url,
             data,
@@ -44,7 +44,6 @@ export default function<T> (args: RequstOpt) : Promise<T> {
             },
             fail(err) {
                 reject(err);
-
                 showToast('网络连接失败，请重新加载')
               },
         })
